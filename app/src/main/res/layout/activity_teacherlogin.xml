@@ -7,7 +7,8 @@
     android:paddingVertical="20dp"
     android:paddingHorizontal="30dp"
     android:background="@color/colorAccent"
-    tools:context=".adminlogin">
+    tools:context=".teacherlogin">
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -16,10 +17,10 @@
         android:layout_centerInParent="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="15dp"
-        app:cardPreventCornerOverlap="false">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+       app:cardPreventCornerOverlap="false">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/loginaccount"
             android:layout_width="wrap_content"
@@ -77,7 +78,6 @@
             android:text="Login"
             android:background="@drawable/buttonround"
             android:layout_below="@id/check"/>
-
         <Button
             android:id="@+id/forgotpassword"
             android:layout_width="wrap_content"
@@ -89,19 +89,7 @@
             android:textAllCaps="false"
             android:background="#00000000"
             android:layout_below="@id/login"/>
-
-        </RelativeLayout>
+    </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/signup"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:text="Don't have an account? Sign Up."
-        android:textColor="#090000"
-        android:textAllCaps="false"
-        android:background="#00000000"/>
 </RelativeLayout>

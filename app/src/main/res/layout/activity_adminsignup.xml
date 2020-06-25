@@ -6,104 +6,123 @@
     android:layout_height="match_parent"
     android:paddingVertical="20dp"
     android:paddingHorizontal="30dp"
+    android:background="@color/colorAccent"
     tools:context=".adminsignup">
 
     <TextView
-        android:id="@+id/createaccount"
+        android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Create Account"
+        android:layout_centerHorizontal="true"
+        android:text="Let's Get Started!"
         android:textColor="#000"
         android:textSize="30dp"
         android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/adminname"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Full Name"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/createaccount"/>
-    <EditText
-        android:id="@+id/adminemail"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:hint="E-Mail"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/adminname"/>
-    <EditText
-        android:id="@+id/mobilenumber"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Mobile Number"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/adminemail"/>
-    <EditText
-        android:id="@+id/username1"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Username"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/mobilenumber"/>
-    <EditText
-        android:id="@+id/password1"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Password"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/username1"/>
-    <EditText
-        android:id="@+id/cpassword1"
-        android:layout_width="250dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:hint="Confirm Password"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edittextround"
-        android:layout_below="@id/password1"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="15dp"
+        app:cardPreventCornerOverlap="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/adminname"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/adminemail"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/adminname"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/adminphone"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Phone"
+                android:inputType="phone"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/adminemail"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/username1"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Username"
+                android:inputType="textVisiblePassword|textNoSuggestions"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/adminphone"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/password1"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/username1"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/cpassword1"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/password1"
+                android:layout_marginBottom="15dp"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
     <Button
-        android:id="@+id/signup1"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:id="@+id/createaccount"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="Sign up"
-        android:layout_below="@+id/cpassword1"
+        android:layout_below="@id/cardview2"
+        android:text="Create Account"
         android:background="@drawable/buttonround"/>
-    <TextView
-        android:id="@+id/alreadyaccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="80dp"
-        android:layout_alignParentBottom="true"
-        android:text="Already have a account?"
-        android:textColor="#000"/>
+
     <Button
         android:id="@+id/login1"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignBaseline="@+id/alreadyaccount"
-        android:layout_toRightOf="@+id/alreadyaccount"
-        android:text="Sign in"
+        android:text="Already have an account? Login Here."
         android:textColor="#090000"
         android:textAllCaps="false"
         android:background="#00000000"/>
+
 </RelativeLayout>
