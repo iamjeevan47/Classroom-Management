@@ -32,6 +32,8 @@ dependencies {
 
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'  //floating edittext
+    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'  //BottomTabbedNavigation
+
 
 }

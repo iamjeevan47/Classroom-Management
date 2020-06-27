@@ -35,7 +35,16 @@
             android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp"
-            app:cardPreventCornerOverlap="false"/>
+            android:onClick="admin"
+            app:cardPreventCornerOverlap="false">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADMIN"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/teachercard"
             android:layout_width="280dp"
@@ -44,7 +53,16 @@
             android:layout_below="@+id/admincard"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp"
-            app:cardPreventCornerOverlap="false"/>
+            android:onClick="teacher"
+            app:cardPreventCornerOverlap="false">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEACHER"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/studentcard"
             android:layout_width="280dp"
@@ -54,7 +72,16 @@
             android:layout_below="@+id/teachercard"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp"
-            app:cardPreventCornerOverlap="false"/>
+            android:onClick="student"
+            app:cardPreventCornerOverlap="false">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STUDENT"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 
     <RelativeLayout
