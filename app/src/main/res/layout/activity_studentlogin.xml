@@ -36,7 +36,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Please Sign in to continue"
                 android:textSize="15dp"
-                android:textColor="#090000"
+                android:textColor="#000"
                 android:layout_below="@+id/loginaccount"/>
             <EditText
                 android:id="@+id/username"
@@ -83,7 +83,7 @@
                 android:layout_marginVertical="15dp"
                 android:layout_centerHorizontal="true"
                 android:text="Forgot Password?"
-                android:textColor="#090000"
+                android:textColor="#000"
                 android:textAllCaps="false"
                 android:background="#00000000"
                 android:layout_below="@id/login"/>
