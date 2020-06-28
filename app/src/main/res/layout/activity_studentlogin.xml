@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Keep me signed in"
+                android:buttonTint="#000"
                 android:layout_below="@+id/password"
                 android:layout_alignLeft="@+id/password"/>
             <Button
