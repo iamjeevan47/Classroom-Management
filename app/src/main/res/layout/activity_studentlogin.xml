@@ -6,8 +6,18 @@
     android:layout_height="match_parent"
     android:paddingVertical="20dp"
     android:paddingHorizontal="30dp"
-    android:background="@color/colorAccent"
+    android:background="@color/black"
     tools:context=".studentlogin">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginVertical="30dp"
+        android:padding="12dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/loginbg"
+        android:src="@drawable/applogo"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -19,7 +29,8 @@
         app:cardPreventCornerOverlap="false">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/studentcardbg">
             <TextView
                 android:id="@+id/loginaccount"
                 android:layout_width="wrap_content"

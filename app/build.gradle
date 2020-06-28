@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'  //floating edittext
     implementation 'com.github.armcha:SpaceNavigationView:1.6.0'  //BottomTabbedNavigation
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
 
 
 }
