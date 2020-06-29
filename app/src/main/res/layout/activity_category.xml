@@ -16,6 +16,7 @@
         android:paddingTop="20dp"
         android:gravity="center|top"
         tools:ignore="Suspicious0dp">
+
         <TextView
             android:id="@+id/classroommanagement"
             android:layout_width="wrap_content"
@@ -23,7 +24,8 @@
             android:layout_centerHorizontal="true"
             android:text="Classroom Management"
             android:textColor="@color/white"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            app:fontFamily="@font/kotta_one" />
 
         <ImageView
             android:id="@+id/image"
