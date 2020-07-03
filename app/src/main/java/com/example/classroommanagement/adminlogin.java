@@ -22,7 +22,7 @@ public class adminlogin extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(getApplicationContext(),bottomtabbednavigation.class));
+               startActivity(new Intent(getApplicationContext(),navadmin.class));
             }
         });
 

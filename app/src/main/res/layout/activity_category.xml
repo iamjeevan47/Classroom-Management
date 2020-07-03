@@ -52,10 +52,17 @@
             app:cardElevation="15dp"
             android:onClick="admin"
             app:cardPreventCornerOverlap="false">
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/admincardbg"/>
+                android:background="@drawable/admincardbg"
+                android:text="Admin"
+                android:textSize="25dp"
+                android:fontFamily="@font/kotta_one"
+                android:paddingLeft="70dp"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:textColor="@color/black"/>
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -73,10 +80,17 @@
             app:cardElevation="15dp"
             android:onClick="teacher"
             app:cardPreventCornerOverlap="false">
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/teachercardbg"/>
+                android:background="@drawable/teachercardbg"
+                android:text="Teacher"
+                android:textSize="25dp"
+                android:fontFamily="@font/kotta_one"
+                android:paddingLeft="78dp"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:textColor="@color/black"/>
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -94,10 +108,17 @@
             app:cardElevation="15dp"
             android:onClick="student"
             app:cardPreventCornerOverlap="false">
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/studentcardbg"/>
+                android:background="@drawable/studentcardbg"
+                android:text="Student"
+                android:textSize="25dp"
+                android:fontFamily="@font/kotta_one"
+                android:paddingLeft="78dp"
+                android:textAlignment="gravity"
+                android:gravity="center"
+                android:textColor="@color/black"/>
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
