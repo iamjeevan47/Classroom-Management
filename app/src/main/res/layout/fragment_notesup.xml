@@ -6,15 +6,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".NotesupFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/atoolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Notes"
-            app:menu="@menu/optadmin"/>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="65dp"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/pdfname"
+            android:layout_width="240dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/edittextround"
+            android:gravity="center"
+            android:hint="Enter PDF File Name" />
+
+        <Button
+            android:id="@+id/uploadpdf"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/pdfname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/buttonround"
+            android:text="UPLOAD" />
+
+        <Button
+            android:id="@+id/viewpdf"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/uploadpdf"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/buttonround"
+            android:text="view notes" />
+    </RelativeLayout>
+
 </FrameLayout>

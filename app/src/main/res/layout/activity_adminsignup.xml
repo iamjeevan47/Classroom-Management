@@ -18,16 +18,16 @@
         android:text="Let's Get Started!"
         android:textColor="@color/skyblue"
         android:textSize="30dp"
+        app:fontFamily="@font/kotta_one"
         android:textStyle="bold"/>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="15dp"
         app:cardPreventCornerOverlap="false">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,6 +42,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
                 android:hint="Name"
+                app:met_textColorHint="#616161"
                 android:inputType="textPersonName"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"/>
@@ -52,6 +53,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Email"
+                app:met_textColorHint="#616161"
                 android:inputType="textEmailAddress"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
@@ -63,7 +65,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Phone"
+                app:met_textColorHint="#616161"
                 android:inputType="phone"
+                android:maxLength="12"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
                 android:layout_below="@id/adminemail"/>
@@ -74,6 +78,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Username"
+                app:met_textColorHint="#616161"
                 android:inputType="textVisiblePassword|textNoSuggestions"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
@@ -85,6 +90,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Password"
+                app:met_textColorHint="#616161"
                 android:inputType="textPassword"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
@@ -96,6 +102,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Confirm Password"
+                app:met_textColorHint="#616161"
                 android:inputType="textPassword"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
@@ -103,7 +110,6 @@
                 android:layout_marginBottom="15dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
     <Button
         android:id="@+id/createaccount"
         android:layout_width="140dp"
@@ -113,7 +119,6 @@
         android:layout_below="@id/cardview2"
         android:text="Create Account"
         android:background="@drawable/buttonround"/>
-
     <Button
         android:id="@+id/login1"
         android:layout_width="wrap_content"
@@ -125,5 +130,4 @@
         android:textColor="#fff"
         android:textAllCaps="false"
         android:background="#00000000"/>
-
 </RelativeLayout>

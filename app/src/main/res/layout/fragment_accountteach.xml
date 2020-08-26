@@ -6,17 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AccountteachFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/ttoolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Account"
-            app:menu="@menu/optstudent"/>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/kotta_one"
-            android:text="YOUR PROFILE"
+            android:text="PROFILE"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="25dp" />

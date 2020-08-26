@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".uploadtimetable">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="TimeTable"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <EditText
+        android:id="@+id/pdfname"
+        android:layout_width="240dp"
+        android:layout_height="35dp"
+        android:layout_centerInParent="true"
+        android:hint="Enter PDF File Name"
+        android:gravity="center"
+        android:background="@drawable/edittextround"/>
+    <Button
+        android:id="@+id/uploadpdf"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="UPLOAD"
+        android:background="@drawable/buttonround"
+        android:layout_below="@id/pdfname"/>
+    <Button
+        android:id="@+id/viewpdf"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="view timetable"
+        android:background="@drawable/buttonround"
+        android:layout_below="@id/uploadpdf"/>
+</RelativeLayout>

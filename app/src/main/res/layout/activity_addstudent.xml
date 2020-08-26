@@ -12,114 +12,129 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/atoolbar"
+            android:id="@+id/stoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="Add Student"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/skyblue">
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/studentroll"
-            android:layout_width="250dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="15dp"
-            android:hint="Enrollment Number"
-            android:inputType="number"
-            app:met_primaryColor="#000"
-            app:met_floatingLabel="highlight"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/studentcourse"
-            android:layout_width="250dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Course"
-            android:inputType="textPersonName"
-            app:met_primaryColor="#000"
-            app:met_floatingLabel="highlight"
-            android:layout_below="@id/studentroll"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/studentname"
-            android:layout_width="250dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            app:met_primaryColor="#000"
-            app:met_floatingLabel="highlight"
-            android:layout_below="@id/studentcourse"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+        app:cardCornerRadius="20dp"
+        app:cardElevation="15dp"
+        app:cardPreventCornerOverlap="false">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/skyblue">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/studentroll"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:hint="Enrollment Number"
+                app:met_textColorHint="#616161"
+                android:inputType="number"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/studentcourse"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Course"
+                app:met_textColorHint="#616161"
+                android:inputType="text"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/studentroll"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/studentname"
+                android:layout_width="250dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Name"
+                app:met_textColorHint="#616161"
+                android:inputType="textPersonName"
+                app:met_primaryColor="#000"
+                app:met_floatingLabel="highlight"
+                android:layout_below="@id/studentcourse"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/studentemail"
                 android:layout_width="250dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Email"
+                app:met_textColorHint="#616161"
                 android:inputType="textEmailAddress"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
                 android:layout_below="@id/studentname"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/studentphone"
                 android:layout_width="250dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Phone"
+                app:met_textColorHint="#616161"
                 android:inputType="phone"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
                 android:layout_below="@id/studentemail"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/studentuser"
                 android:layout_width="250dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Username"
+                app:met_textColorHint="#616161"
                 android:inputType="textVisiblePassword|textNoSuggestions"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
                 android:layout_below="@id/studentphone"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/studentpassword"
                 android:layout_width="250dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Password"
+                app:met_textColorHint="#616161"
                 android:inputType="textPassword"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
                 android:layout_below="@id/studentuser"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/studentcpassword"
                 android:layout_width="250dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
                 android:hint="Confirm Password"
+                app:met_textColorHint="#616161"
                 android:inputType="textPassword"
                 app:met_primaryColor="#000"
                 app:met_floatingLabel="highlight"
-                android:layout_below="@id/studentpassword"
-                android:layout_marginBottom="15dp"/>
-    </RelativeLayout>
-
+                android:layout_below="@id/studentpassword"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
     <Button
         android:id="@+id/add"
         android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:text="Add Student"

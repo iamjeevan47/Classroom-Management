@@ -24,7 +24,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_above="@+id/studentetail"
+            android:layout_above="@+id/studentdetail"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp"
             app:cardPreventCornerOverlap="false">
@@ -40,7 +40,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/studentetail"
+            android:id="@+id/studentdetail"
             android:layout_width="280dp"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
@@ -67,7 +67,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/studentetail"
+            android:layout_below="@+id/studentdetail"
             app:cardCornerRadius="20dp"
             app:cardElevation="15dp"
             app:cardPreventCornerOverlap="false">

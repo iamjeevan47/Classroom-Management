@@ -1,50 +1,26 @@
 package com.example.classroommanagement;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class AttendanceFragment extends Fragment {
+public class viewattendance extends AppCompatActivity {
 
     EditText datepicker;
 
-    public AttendanceFragment()
-    {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        getActivity().setTitle("Attendance");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_attendance, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
-        datepicker = view.findViewById(R.id.pickdate);
+        setContentView(R.layout.activity_viewattendance);
+        datepicker = findViewById(R.id.pickdate);
         datepicker.setKeyListener(null);
 
         datepicker.setOnClickListener(new View.OnClickListener()
@@ -58,6 +34,8 @@ public class AttendanceFragment extends Fragment {
             }
         });
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void showdatedialog(final EditText datepicker)
@@ -74,6 +52,6 @@ public class AttendanceFragment extends Fragment {
                 datepicker.setText(simpleDateFormat.format(calendar));
             }
         };
-        new DatePickerDialog(getContext(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(viewattendance.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 }

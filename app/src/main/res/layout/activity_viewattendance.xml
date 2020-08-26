@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AttendanceFragment">
+    tools:context=".viewattendance">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/viewattend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Attendance Record"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -70,11 +78,10 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
-        <RelativeLayout
+    <RelativeLayout
         android:id="@+id/r2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-            android:layout_marginBottom="65dp"
         android:paddingVertical="7dp"
         android:layout_alignParentBottom="true">
         <Button
@@ -82,9 +89,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
             android:text="View"
             android:background="@drawable/buttonround"/>
-        </RelativeLayout>
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:text="Update"
+            android:background="@drawable/buttonround"/>
     </RelativeLayout>
-</FrameLayout>
+
+</RelativeLayout>

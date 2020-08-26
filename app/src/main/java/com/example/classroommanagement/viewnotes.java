@@ -1,48 +1,28 @@
 package com.example.classroommanagement;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesFragment extends Fragment {
+public class viewnotes extends AppCompatActivity {
 
     ListView noteslistView;
-    //  DatabaseReference databaseReference;
+//  DatabaseReference databaseReference;
     List<timetablegettersetter> uploadPDF;
 
-    public NotesFragment()
-    {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        getActivity().setTitle("Notes");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
-        noteslistView = view.findViewById(R.id.noteslist);
+        setContentView(R.layout.activity_viewnotes);
+        noteslistView = findViewById(R.id.noteslist);
         uploadPDF = new ArrayList<>();
 
 //      viewAllFiles();
@@ -60,7 +40,7 @@ public class NotesFragment extends Fragment {
             }
         });
     }
-//
+    //
 //    private void viewAllFiles()
 //    {
 //        private void viewAllFiles()
@@ -97,7 +77,8 @@ public class NotesFragment extends Fragment {
 //                    };
 //                    pdflistView.setAdapter(adapter);
 //                }
-//            });
+//
+//                });
 //         }
 //    }//viewAllFiles
 }
