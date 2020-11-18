@@ -9,15 +9,9 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/security"
-        android:title="Security"
+        android:id="@+id/changepasswordd"
+        android:title="Change Password"
         android:orderInCategory="2"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/help"
-        android:title="Help"
-        android:orderInCategory="3"
         app:showAsAction="never"/>
 
 </menu>

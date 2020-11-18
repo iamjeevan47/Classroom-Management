@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 public class MyclassFragment extends Fragment {
 
     CardView teacher,student,details;
+    private String Adminemail;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -24,8 +25,10 @@ public class MyclassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         getActivity().setTitle("My Class");
+        View view = inflater.inflate(R.layout.fragment_myclass, container, false);
+        Adminemail = getActivity().getIntent().getStringExtra("email");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_myclass, container, false);
+        return view;
     }
 
     @Override
@@ -39,7 +42,10 @@ public class MyclassFragment extends Fragment {
         teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),addteacher.class));
+
+                Intent i = new Intent(getActivity(),addteacher.class);
+                i.putExtra("email",Adminemail);
+                startActivity(i);
             }
         });
 

@@ -9,7 +9,7 @@ import android.view.View;
 
 public class classdetails extends AppCompatActivity {
 
-    CardView student,teacher,record;
+    CardView student,teacher; //record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class classdetails extends AppCompatActivity {
         setContentView(R.layout.activity_classdetails);
         student = findViewById(R.id.studentdetail);
         teacher = findViewById(R.id.teacherdetails);
-        record = findViewById(R.id.attendancedetail);
+        //record = findViewById(R.id.attendancedetail);
 
         student.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,13 +32,11 @@ public class classdetails extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),teacherdetails.class));
             }
         });
-
-        record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),viewattendance.class));
-            }
-        });
-
+//        record.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext(),viewattendance.class));
+//            }
+//        });
     }
 }

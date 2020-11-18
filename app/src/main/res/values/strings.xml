@@ -11,4 +11,34 @@
         <item>Lecture 4</item>
         <item>Lecture 5</item>
     </array>
+
+    <array name="Department">
+        <item>Select Department</item>
+        <item>Department of Law</item>
+        <item>Department of Education</item>
+        <item>Department of Management/IT</item>
+        <item>Department of Journalism and MC</item>
+    </array>
+
+    <array name="Designation">
+        <item>Select Designation</item>
+        <item>HOD</item>
+        <item>Professor</item>
+        <item>Associate Professor</item>
+        <item>Assistant Professor</item>
+    </array>
+
+    <array name="Courses">
+        <item>Select Course</item>
+        <item>B.Ed</item>
+        <item>BBA</item>
+        <item>BCA</item>
+        <item>BJMC</item>
+        <item>B.Com</item>
+        <item>BA LLB</item>
+        <item>BBA LLB</item>
+        <item>BA Eco(H)</item>
+        <item>BA Eng(H)</item>
+    </array>
 </resources>
+

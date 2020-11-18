@@ -2,6 +2,7 @@ package com.example.classroommanagement;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,112 +11,206 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class NotesupFragment extends Fragment {
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+
+public class NotesupFragment extends Fragment
+{
+    private Uri filepath;
     EditText pdf;
-    Button uploadpdf, viewpdf;
-//    StorageReference storageReference;
-//    DatabaseReference databaseReference;
+    TextView textstatus;
+    Button uploadpdf, choosepdf;
+    ProgressDialog progressDialog;
+    StorageReference storageReference; //forupload
 
-    public NotesupFragment() {
-        // Required empty public constructor
-    }
+    ListView listView;
+    List<notesgettersetter> uploadList; //forview
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+    public NotesupFragment()
     {
-        super.onCreate(savedInstanceState);
+        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         getActivity().setTitle("Notes");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notesup, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_notesup, container, false);
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
-        super.onViewCreated(view, savedInstanceState);
         pdf = view.findViewById(R.id.pdfname);
         uploadpdf = view.findViewById(R.id.uploadpdf);
-        viewpdf = view.findViewById(R.id.viewpdf);
-//        storageReference = FirebaseStorage.getInstance().getReference();
-//        databaseReference = FirebaseDatabase.getInstance().getReference("Notes");
+        choosepdf = view.findViewById(R.id.choosepdf);
+        textstatus = view.findViewById(R.id.textstatus);
+        storageReference = FirebaseStorage.getInstance().getReference();
 
-        uploadpdf.setOnClickListener(new View.OnClickListener()
+        listView = view.findViewById(R.id.listview);
+        uploadList = new ArrayList<>();
+
+       // viewAllFiles();
+
+        choosepdf.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-//                selectPDFfile();
+                selectPDFfile();
             }
         });
 
-        viewpdf.setOnClickListener(new View.OnClickListener() {
+        uploadpdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                startActivity(new Intent(getContext(),viewnotes.class));
+                uploadPDFFile();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                notesgettersetter notesgettersetter = uploadList.get(position);
+                String name = notesgettersetter.getName();
+                String link = notesgettersetter.getUrl();
+
+                Intent intent = new Intent(getActivity(),pdfviewer.class);
+                intent.putExtra("file",link);
+                intent.putExtra("pdf",name);
+//                intent.setType(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(notesgettersetter.getUrl()));
+//                intent.setDataAndType(Uri.fromFile(file), "aplication/pdf");
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+        return view;
+    }
+
+    private void selectPDFfile()
+    {
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select File"),1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null)
+        {
+            filepath = data.getData();
+            textstatus.setText("File Selected");
+        }
+    }
+
+    private void uploadPDFFile()
+    {
+        if (filepath!= null)
+        {
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setTitle("Uploading Notes");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+            StorageReference reference = storageReference.child("Notes/" + pdf.getText().toString() + ".pdf");
+            reference.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
+                {
+                    progressDialog.dismiss();
+                    textstatus.setText("File Uploaded Successfully");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                    progressDialog.setMessage((int)progress+"% " + " Uploaded");
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "Please Select File", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void viewAllFiles()
+    {
+        storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference listRef = storageReference.child("Notes");
+        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult)
+            {
+                List<StorageReference> prefixes = listResult.getPrefixes();
+                List<StorageReference> items = listResult.getItems();
+                System.out.println(items.get(1).getName());
+
+                for (StorageReference prefix : listResult.getPrefixes())
+                {
+//                    System.out.println(prefix.listAll());
+                }
+                for (StorageReference item : listResult.getItems())
+                {
+                    notesgettersetter notesgettersetter = new notesgettersetter(item.getName(),item.getDownloadUrl().toString());
+                    uploadList.add(notesgettersetter);
+                }
+                String[] upload = new String[uploadList.size()];
+
+                for(int i=0;i<upload.length;i++)
+                {
+                    upload[i] = uploadList.get(i).getName();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,upload)
+                {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent)
+                    {
+                        View view = super.getView(position, convertView, parent);
+                        TextView text = (TextView) view.findViewById(android.R.id.text1);
+                        text.setTextColor(Color.BLACK);
+                        return view;
+                    }
+                };
+                listView.setAdapter(adapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e)
+            {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-//
-//    private void selectPDFfile()
-//    {
-//        Intent intent = new Intent();
-//        intent.setType("application/pdf");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent,"Select PDF File"),1);
-//    }
-//
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null)
-//        {
-//            uploadPDFFile (data.getData());
-//        }
-//    }
-//
-//    private void uploadPDFFile(Uri data)
-//    {
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setTitle("Uploading...");
-//        progressDialog.show();
-//
-//        StorageReference reference = storageReference.child("Notes/"+System.currentTimeMillis()+".pdf");
-//        reference.putFile(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
-//                {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
-//                        {
-//                            Task<Uri> uri  = taskSnapshot.getStorage().getDownloadUrl();
-//                            while (!uri.isComplete());
-//                            Uri url = uri.getResult();
-//
-//                            timetablegettersetter uploadPDf = new timetablegettersetter(pdf.getText().toString(),url.toString());
-//                            databaseReference.child(databaseReference.push().getKey()).setValue(uploadPDf);
-//                            Toast.makeText(getContext(), "PDF Uploaded", Toast.LENGTH_SHORT).show();
-//                            progressDialog.dismiss();
-//                        }
-//                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>()
-//                        {
-//                            @Override
-//                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot)
-//                            {
-//                                double progress = (100.0*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-//                                progressDialog.setMessage("Uploaded: "+(int)progress+"%");
-//                            }
-//                        });
-//    }
-
-}//classend
+}

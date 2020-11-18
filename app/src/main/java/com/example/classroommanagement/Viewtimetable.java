@@ -6,92 +6,115 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.ListResult;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Viewtimetable extends AppCompatActivity {
 
-    ListView pdflistView;
-    DatabaseReference databaseReference;
-    List<timetablegettersetter> uploadPDF;
+    ListView listView;
+    StorageReference storageReference;
+    List<timetablegettersetter> uploadList; //forview
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewtimetable);
-        pdflistView = findViewById(R.id.timetablelist);
-        uploadPDF = new ArrayList<>();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        listView = findViewById(R.id.timetablelist);
+        uploadList = new ArrayList<>();
 
         viewAllFiles();
 
-        pdflistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                timetablegettersetter tgs = uploadPDF.get(position);
-
-                Intent intent = new Intent();
-                intent.setType(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(tgs.getUrl()));
+                timetablegettersetter timetablegettersetter = uploadList.get(position);
+                String name = timetablegettersetter.getName();
+                String link = timetablegettersetter.getUrl();
+                Intent intent = new Intent(Viewtimetable.this, pdfviewer.class);
+                intent.putExtra("file", link);
+                intent.putExtra("pdf", name);
+//                intent.setType(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(timetablegettersetter.getUrl()));
+//                intent.setDataAndType(Uri.fromFile(file), "aplication/pdf");
                 startActivity(intent);
+                finish();
             }
         });
     }
 
     private void viewAllFiles()
     {
-        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
-        databaseReference.addValueEventListener(new ValueEventListener()
+        storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference listRef = storageReference.child("Time-Table");
+        listRef.listAll().addOnSuccessListener(new OnSuccessListener<ListResult>() {
+            @Override
+            public void onSuccess(ListResult listResult)
             {
-                @Override
-                public void onDataChange( DataSnapshot snapshot) {
+                List<StorageReference> prefixes = listResult.getPrefixes();
+                List<StorageReference> items = listResult.getItems();
+                System.out.println(items.get(1).getName());
 
-                    for (DataSnapshot postSnapshot : snapshot.getChildren())
-                    {
-                        timetablegettersetter timetablegettersetter = postSnapshot.getValue(timetablegettersetter.class);
-                        uploadPDF.add(timetablegettersetter);
-                    }
+                for (StorageReference prefix : listResult.getPrefixes())
+                {
+//                    System.out.println(prefix.listAll());
+                }
+                for (StorageReference item : listResult.getItems())
+                {
+                    Log.d("url", item.getPath());
+                    timetablegettersetter timetablegettersetter = new timetablegettersetter(item.getName(),item.getDownloadUrl().toString());
+                    uploadList.add(timetablegettersetter);
+                }
+                String[] upload = new String[uploadList.size()];
 
-                    String[] uploads = new String[uploadPDF.size()];
-
-                    for(int i=0;i<uploads.length;i++)
-                    {
-                        uploads[i] = uploadPDF.get(i).getName();
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,uploads)
-                    {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent)
-                        {
-                            View view = super.getView(position, convertView, parent);
-                            TextView textView = view.findViewById(android.R.id.text1);
-                            textView.setTextColor(Color.BLACK);
-                            return view;
-                        }
-                    };
-                    pdflistView.setAdapter(adapter);
+                for(int i=0;i<upload.length;i++)
+                {
+                    upload[i] = uploadList.get(i).getName();
                 }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-
-                }
-
-            });
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,upload)
+                {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent)
+                    {
+                        View view = super.getView(position, convertView, parent);
+                        TextView text = (TextView) view.findViewById(android.R.id.text1);
+                        text.setTextColor(Color.BLACK);
+                        return view;
+                    }
+                };
+                listView.setAdapter(adapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e)
+            {
+                Toast.makeText(Viewtimetable.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }//viewAllFiles
 }

@@ -19,7 +19,7 @@
             android:id="@+id/ttoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/optstudent"/>
+            app:menu="@menu/optadmin"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,5 +33,4 @@
         app:itemTextColor="#64B5F6"
         android:elevation="16dp"
         android:padding="8dp"/>
-
 </RelativeLayout>

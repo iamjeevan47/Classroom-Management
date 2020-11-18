@@ -21,6 +21,8 @@
         android:id="@+id/timetablelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ttool"/>
-
+        android:layout_below="@id/ttool"
+        android:paddingTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/appbg"/>
 </RelativeLayout>

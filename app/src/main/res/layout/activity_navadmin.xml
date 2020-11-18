@@ -29,8 +29,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/navigationbg"
         app:menu="@menu/adminmenu"
-        app:itemIconTint="#64B5F6"
-        app:itemTextColor="#64B5F6"
+        app:itemIconTint="#138ff7"
+        app:itemTextColor="#138ff7"
         android:elevation="16dp"
         android:padding="8dp"/>
 

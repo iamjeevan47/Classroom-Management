@@ -1,18 +1,22 @@
 package com.example.classroommanagement;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class navadmin extends AppCompatActivity {
 
@@ -21,17 +25,22 @@ public class navadmin extends AppCompatActivity {
     private MyclassFragment myclassFragment;
     private NotesupFragment notesupFragment;
     private AccountadFragment accountadFragment;
+    FirebaseAuth auth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_navadmin);
         bottomNavigationView = findViewById(R.id.bottomnavigation);
         frameLayout = findViewById(R.id.fragmentcontainer);
+
+        auth = FirebaseAuth.getInstance();
         myclassFragment = new MyclassFragment();
         notesupFragment = new NotesupFragment();
         accountadFragment = new AccountadFragment();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.atoolbar);
         setSupportActionBar(toolbar);
         setFragment(myclassFragment);
@@ -82,22 +91,43 @@ public class navadmin extends AppCompatActivity {
         switch (id)
         {
             case R.id.admintimetable:
-                Toast.makeText(getApplicationContext(), "Time Table", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),uploadtimetable.class));
                 return true;
 
-            case R.id.security:
-                Toast.makeText(getApplicationContext(), "Security", Toast.LENGTH_SHORT).show();
+            case R.id.updateprofile:
+                startActivity(new Intent(getApplicationContext(),updateadminprofile.class));
                 return true;
 
-            case R.id.notifiy:
-                Toast.makeText(getApplicationContext(), "Notification", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.help:
-                Toast.makeText(getApplicationContext(), "Help", Toast.LENGTH_SHORT).show();
+            case R.id.changepassword:
                 startActivity(new Intent(getApplicationContext(),changepassword.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout!")
+                .setMessage("Are you sure you want to logout?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getApplicationContext(),adminlogin.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

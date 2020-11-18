@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/appbg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AccountadFragment">
 
@@ -11,110 +12,133 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="30dp"
         android:paddingVertical="20dp">
-        <TextView
-            android:id="@+id/profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/user"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            android:fontFamily="@font/kotta_one"
-            android:text="PROFILE"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="25dp" />
+            android:background="@drawable/ic_baseline_account_circle_24"/>
 
-        <TextView
-            android:id="@+id/tname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile"
-            android:layout_marginTop="60dp"
-            android:text="Name:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+        <RelativeLayout
+            android:id="@+id/lay2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="60dp"
+            android:layout_below="@id/user"
+            android:layout_above="@id/logout"
+            android:padding="15dp">
 
-        <TextView
-            android:id="@+id/dname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tname"
-            android:layout_marginLeft="45dp"
-            android:layout_toRightOf="@id/tname"
-            android:text="Text Display"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            <RelativeLayout
+                android:id="@+id/lo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tusername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tname"
-            android:layout_marginTop="5dp"
-            android:text="Username:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/userlogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/userlogo"
+                    android:text="Name"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/arvo"/>
+                <TextView
+                    android:id="@+id/adminname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/userlogo"
+                    android:textColor="@color/black"
+                   android:text="Admin Name"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/dusername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tusername"
-            android:layout_marginLeft="11.5dp"
-            android:layout_toRightOf="@id/tusername"
-            android:text="Text Display"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            <RelativeLayout
+                android:id="@+id/lo2"
+                android:layout_below="@id/lo1"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/temail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tusername"
-            android:layout_marginTop="5dp"
-            android:text="Email:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/maillogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_email_black_24dp"/>
+                <TextView
+                    android:id="@+id/mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/maillogo"
+                    android:text="E-mail"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/arvo"/>
+                <TextView
+                    android:id="@+id/adminmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mail"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/maillogo"
+                    android:textColor="@color/black"
+                    android:text="Admin Email"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/demail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/temail"
-            android:layout_marginLeft="48.5dp"
-            android:layout_toRightOf="@id/temail"
-            android:text="Text Display"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+            <RelativeLayout
+                android:id="@+id/lo3"
+                android:layout_below="@id/lo2"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/temail"
-            android:layout_marginTop="5dp"
-            android:text="Phone:"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-        <TextView
-            android:id="@+id/dphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tphone"
-            android:layout_marginLeft="42dp"
-            android:layout_toRightOf="@id/tphone"
-            android:text="Text Display"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+                <ImageView
+                    android:id="@+id/phonelogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_local_phone_black_24dp"/>
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/phonelogo"
+                    android:text="Phone"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/arvo"/>
+                <TextView
+                    android:id="@+id/adminphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/phonelogo"
+                    android:textColor="@color/black"
+                    android:text="Admin Phone"/>
+                </RelativeLayout>
+        </RelativeLayout>
         <Button
             android:id="@+id/logout"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
-            android:layout_marginBottom="50dp"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="80dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="Logout"
+            android:textColor="#138ff7"
             android:background="@drawable/buttonround"/>
     </RelativeLayout>
-
-
 </FrameLayout>
