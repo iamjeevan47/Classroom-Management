@@ -90,7 +90,7 @@ public class teacherdetails extends AppCompatActivity
 
         }
 
-//        private void phonecall()
+//        private void phonecall()  //forphonecall
 //        {
 //            String Dialer = num.getText().toString();
 //            if (ContextCompat.checkSelfPermission(teacherdetails.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/appbg"
-    tools:context=".updateadminprofile">
+    tools:context=".updateteacherprofile">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -42,7 +43,41 @@
             android:paddingBottom="15dp">
 
             <RelativeLayout
+                android:id="@+id/sp1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+                <Spinner
+                    android:id="@+id/dept"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:spinnerMode="dropdown"
+                    android:fontFamily="@font/arvo"
+                    android:entries="@array/Department"
+                    android:background="@drawable/spinnerbg"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sp2"
+                android:layout_below="@id/sp1"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+                <Spinner
+                    android:id="@+id/desig"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:spinnerMode="dropdown"
+                    android:fontFamily="@font/arvo"
+                    android:entries="@array/Designation"
+                    android:background="@drawable/spinnerbg"/>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/lo1"
+                android:layout_below="@id/sp2"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -154,7 +189,6 @@
             android:text="UPDATE"
             android:textColor="#138ff7"
             android:background="@drawable/buttonround"/>
-
         <Button
             android:id="@+id/cnl"
             android:layout_width="120dp"

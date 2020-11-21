@@ -45,8 +45,8 @@ public class studentlogin extends AppCompatActivity {
             public void onClick(View view)
             {
                 hideKeyBoard();
-                String email = studentemail.getText().toString().trim();
-                String password = studentpassword.getText().toString().trim();
+                final String email = studentemail.getText().toString().trim();
+                final String password = studentpassword.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     studentemail.setError("Email is Required.");
@@ -60,7 +60,9 @@ public class studentlogin extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(studentlogin.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),navstudent.class));
+                            Intent i = new Intent(getApplicationContext(),navstudent.class);
+                            i.putExtra("studentemail",email);
+                            startActivity(i);
                             finish();
                         }
                         else

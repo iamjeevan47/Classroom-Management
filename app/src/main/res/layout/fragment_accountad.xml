@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="15dp"
             android:layout_below="@id/user"
             android:layout_above="@id/logout"
             android:padding="15dp">
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/userlogo"
                     android:textColor="@color/black"
-                   android:text="Admin Name"/>
+                   android:text="Name"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -93,7 +93,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/maillogo"
                     android:textColor="@color/black"
-                    android:text="Admin Email"/>
+                    android:text="Email"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -127,7 +127,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_toRightOf="@id/phonelogo"
                     android:textColor="@color/black"
-                    android:text="Admin Phone"/>
+                    android:text="Phone"/>
                 </RelativeLayout>
         </RelativeLayout>
         <Button

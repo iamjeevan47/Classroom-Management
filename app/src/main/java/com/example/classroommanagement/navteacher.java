@@ -92,7 +92,7 @@ public class navteacher extends AppCompatActivity {
                 return true;
 
             case R.id.updateprofile:
-                Toast.makeText(getApplicationContext(), "Update Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),updateteacherprofile.class));
                 return true;
 
             case R.id.changepassword:
