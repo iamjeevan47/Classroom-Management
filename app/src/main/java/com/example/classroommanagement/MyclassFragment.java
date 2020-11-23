@@ -51,8 +51,11 @@ public class MyclassFragment extends Fragment {
 
         student.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(),addstudent.class));
+            public void onClick(View view)
+            {
+                Intent i = new Intent(getActivity(),addstudent.class);
+                i.putExtra("email",Adminemail);
+                startActivity(i);
             }
         });
 

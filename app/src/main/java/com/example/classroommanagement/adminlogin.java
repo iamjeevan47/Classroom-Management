@@ -72,7 +72,7 @@ public class adminlogin extends AppCompatActivity {
 //        } else {
 //            Intent i = new Intent(adminlogin.this, adminlogin.class);
 //            startActivity(i);
-//        }
+//        }                                                                           //keeplogged in
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

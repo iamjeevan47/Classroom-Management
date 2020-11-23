@@ -56,16 +56,15 @@ public class AccountFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         userId = auth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = fb.collection("Admin").document(getActivity().getIntent().getStringExtra("studentemail").toString());
-//                .document("sudha@gmail.com").collection("Student")
-//                .document(getActivity().getIntent().getStringExtra("studentemail").toString());
+        DocumentReference documentReference = fb.collection("Admin").document("jeevandeepsaini@gmail.com")
+                .collection("Student").document(getActivity().getIntent().getStringExtra("studentemail").toString());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
             {
                 if(documentSnapshot.exists())
                 {
-                    enrollment.setText(documentSnapshot.getString("Enrollment Number"));
+                    enrollment.setText(documentSnapshot.getString("EnrollmentNumber"));
                     course.setText(documentSnapshot.getString("Course"));
                     name.setText(documentSnapshot.getString("Name"));
                     email.setText(documentSnapshot.getString("Email"));

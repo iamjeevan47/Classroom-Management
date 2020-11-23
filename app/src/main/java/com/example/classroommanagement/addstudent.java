@@ -96,13 +96,44 @@ public class addstudent extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful())
                                 {
-                                    FirebaseUser fuser = auth.getCurrentUser();
+                                    final FirebaseUser fuser = auth.getCurrentUser();
+
                                     fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>()
                                     {
                                         @Override
                                         public void onSuccess(Void aVoid)
                                         {
                                             Toast.makeText(addstudent.this, "Verification email has been Sent.", Toast.LENGTH_SHORT).show();
+                                            userId = fuser.getUid();
+                                            DocumentReference documentReference =  firestore.collection("Admin").document(getIntent().getStringExtra("email").toString())
+                                                    .collection("Student").document(semail);
+                                            Map<String, String> Student = new HashMap<>();
+                                            Student.put("Name", sname);
+                                            Student.put("Email", semail);
+                                            Student.put("Phone", phone);
+                                            Student.put("Course", course);
+                                            Student.put("Department", dept);
+                                            Student.put("EnrollmentNumber", enrollment);
+                                            Student.put("Uid", userId);
+                                            documentReference.set(Student).addOnSuccessListener(new OnSuccessListener<Void>()
+                                            {
+                                                @Override
+                                                public void onSuccess(Void aVoid)
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(addstudent.this, "Registered Successfully.", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(getApplicationContext(), navadmin.class));
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener()
+                                            {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e)
+                                                {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    Log.d(TAG, "onFailure: " + e.getMessage());
+                                                }
+                                            });
                                         }
                                     }).addOnFailureListener(new OnFailureListener()
                                     {
@@ -112,38 +143,6 @@ public class addstudent extends AppCompatActivity {
                                         }
                                     });//Send verification link
 
-                                    userId = fuser.getUid();
-
-                                    DocumentReference documentReference =  firestore.collection("Admin")
-                                            .document(getIntent().getStringExtra("email").toString())
-                                            .collection("Student").document(semail);
-                                    Map<String, String> Student = new HashMap<>();
-                                    Student.put("Name", sname);
-                                    Student.put("Email", semail);
-                                    Student.put("Phone", phone);
-                                    Student.put("Course",course);
-                                    Student.put("Department",dept);
-                                    Student.put("Enrollment Number", enrollment);
-                                    Student.put("Uid",userId);
-                                    documentReference.set(Student).addOnSuccessListener(new OnSuccessListener<Void>()
-                                    {
-                                        @Override
-                                        public void onSuccess(Void aVoid)
-                                        {
-                                            progressBar.setVisibility(View.GONE);
-                                            Toast.makeText(addstudent.this, "Registered Successfully.", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getApplicationContext(), navadmin.class));
-                                            finish();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener()
-                                    {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e)
-                                        {
-                                            progressBar.setVisibility(View.GONE);
-                                            Log.d(TAG, "onFailure: " + e.getMessage());
-                                        }
-                                    });
                                 }
                                 else
                                 {
@@ -158,11 +157,6 @@ public class addstudent extends AppCompatActivity {
                 {
                     Toast.makeText(addstudent.this, "Password confirmation doesn't match Password", Toast.LENGTH_LONG).show();
                 }
-
-
-
-
-
             }//endofOnClick
         });
     }//endofOncreate

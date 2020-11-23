@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -51,6 +52,7 @@ public class uploadtimetable extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_uploadtimetable);
 
         pdf = findViewById(R.id.pdfname);
@@ -91,9 +93,6 @@ public class uploadtimetable extends AppCompatActivity {
                 Intent intent = new Intent(uploadtimetable.this,pdfviewer.class);
                 intent.putExtra("file",link);
                 intent.putExtra("pdf",name);
-//                intent.setType(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(timetablegettersetter.getUrl()));
-//                intent.setDataAndType(Uri.fromFile(file), "aplication/pdf");
                 startActivity(intent);
                 finish();
             }
@@ -182,31 +181,37 @@ public class uploadtimetable extends AppCompatActivity {
                 {
 //                    System.out.println(prefix.listAll());
                 }
-                for (StorageReference item : listResult.getItems())
+                for (final StorageReference item : listResult.getItems())
                 {
-                    Log.d("url", item.getPath());
-                    timetablegettersetter timetablegettersetter = new timetablegettersetter(item.getName(),item.getDownloadUrl().toString());
-                    uploadList.add(timetablegettersetter);
-                }
-                String[] upload = new String[uploadList.size()];
+                    item.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
 
-                for(int i=0;i<upload.length;i++)
-                {
-                    upload[i] = uploadList.get(i).getName();
-                }
+                            Log.d("PDF URL", task.getResult().toString());
+                            timetablegettersetter timetablegettersetter = new timetablegettersetter(item.getName(),task.getResult().toString());
+                            uploadList.add(timetablegettersetter);
+                            String[] upload = new String[uploadList.size()];
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,upload)
-                {
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent)
-                    {
-                        View view = super.getView(position, convertView, parent);
-                        TextView text = (TextView) view.findViewById(android.R.id.text1);
-                        text.setTextColor(Color.BLACK);
-                        return view;
-                    }
-                };
-                listView.setAdapter(adapter);
+                            for(int i=0;i<upload.length;i++)
+                            {
+                                upload[i] = uploadList.get(i).getName();
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,upload)
+                            {
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent)
+                                {
+                                    View view = super.getView(position, convertView, parent);
+                                    TextView text = (TextView) view.findViewById(android.R.id.text1);
+                                    text.setTextColor(Color.BLACK);
+                                    return view;
+                                }
+                            };
+                            listView.setAdapter(adapter);
+                        }
+                    });
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -217,3 +222,5 @@ public class uploadtimetable extends AppCompatActivity {
         });
     }
 }
+
+

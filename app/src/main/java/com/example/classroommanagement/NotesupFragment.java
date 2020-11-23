@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -67,7 +69,7 @@ public class NotesupFragment extends Fragment
         listView = view.findViewById(R.id.listview);
         uploadList = new ArrayList<>();
 
-       // viewAllFiles();
+        viewAllFiles();
 
         choosepdf.setOnClickListener(new View.OnClickListener()
         {
@@ -104,7 +106,6 @@ public class NotesupFragment extends Fragment
                 getActivity().finish();
             }
         });
-
         return view;
     }
 
@@ -174,36 +175,42 @@ public class NotesupFragment extends Fragment
             {
                 List<StorageReference> prefixes = listResult.getPrefixes();
                 List<StorageReference> items = listResult.getItems();
-                System.out.println(items.get(1).getName());
 
                 for (StorageReference prefix : listResult.getPrefixes())
                 {
 //                    System.out.println(prefix.listAll());
                 }
-                for (StorageReference item : listResult.getItems())
+                for (final StorageReference item : listResult.getItems())
                 {
-                    notesgettersetter notesgettersetter = new notesgettersetter(item.getName(),item.getDownloadUrl().toString());
-                    uploadList.add(notesgettersetter);
-                }
-                String[] upload = new String[uploadList.size()];
+                    item.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            notesgettersetter notesgettersetter = new notesgettersetter(item.getName(),task.getResult().toString());
+                            uploadList.add(notesgettersetter);
+                            String[] upload = new String[uploadList.size()];
 
-                for(int i=0;i<upload.length;i++)
-                {
-                    upload[i] = uploadList.get(i).getName();
+                            for(int i=0;i<upload.length;i++)
+                            {
+                                upload[i] = uploadList.get(i).getName();
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,upload)
+                            {
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent)
+                                {
+                                    View view = super.getView(position, convertView, parent);
+                                    TextView text = (TextView) view.findViewById(android.R.id.text1);
+                                    text.setTextColor(Color.BLACK);
+                                    return view;
+                                }
+                            };
+                            listView.setAdapter(adapter);
+                        }
+                    });
+
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,upload)
-                {
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent)
-                    {
-                        View view = super.getView(position, convertView, parent);
-                        TextView text = (TextView) view.findViewById(android.R.id.text1);
-                        text.setTextColor(Color.BLACK);
-                        return view;
-                    }
-                };
-                listView.setAdapter(adapter);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

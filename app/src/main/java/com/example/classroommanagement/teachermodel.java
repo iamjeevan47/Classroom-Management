@@ -2,51 +2,51 @@ package com.example.classroommanagement;
 
 public class teachermodel 
 {
-    private String name;
-    private String designation;
-    private String phone;
-    private String email;
+    private String Name;
+    private String Designation;
+    private String Phone;
+    private String Email;
 
     public teachermodel() { }
 
     private teachermodel(String teachername, String teacherdesig, String teacherphone, String teacheremail)
     {
-        this.name = teachername;
-        this.designation = teacherdesig;
-        this.phone = teacherphone;
-        this.email = teacheremail;
+        this.Name = teachername;
+        this.Designation = teacherdesig;
+        this.Phone = teacherphone;
+        this.Email = teacheremail;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public String getDesignation() {
-        return designation;
+        return Designation;
     }
 
     public void setDesignation(String designation) {
-        this.designation = designation;
+        this.Designation = designation;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.Phone = phone;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Email = email;
     }
 
 }

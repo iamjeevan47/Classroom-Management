@@ -20,7 +20,6 @@
         <activity android:name=".updateteacherprofile"></activity>
         <activity android:name=".pdfviewer" />
         <activity android:name=".updateadminprofile" />
-        <activity android:name=".viewnotes" />
         <activity android:name=".Viewtimetable" />
         <activity android:name=".uploadtimetable" />
         <activity android:name=".teacherdetails" />

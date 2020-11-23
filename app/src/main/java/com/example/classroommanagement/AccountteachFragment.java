@@ -43,12 +43,6 @@ public class AccountteachFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
@@ -63,7 +57,8 @@ public class AccountteachFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         userId = auth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = fb.collection("Professor").document(getActivity().getIntent().getStringExtra("teacheremail").toString());
+        DocumentReference documentReference = fb.collection("Admin").document("jeevandeepsaini@gmail.com")
+                .collection("Professor").document(getActivity().getIntent().getStringExtra("teacheremail").toString());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)

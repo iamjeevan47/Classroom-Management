@@ -124,7 +124,7 @@ public class addteacher extends AppCompatActivity {
                                     Professor.put("Name", name);
                                     Professor.put("Email", email);
                                     Professor.put("Phone", phone);
-                                    Professor.put("Desgination",desig);
+                                    Professor.put("Designation",desig);
                                     Professor.put("Department",dept);
                                     Professor.put("Uid",userId);
                                     documentReference.set(Professor).addOnSuccessListener(new OnSuccessListener<Void>()
