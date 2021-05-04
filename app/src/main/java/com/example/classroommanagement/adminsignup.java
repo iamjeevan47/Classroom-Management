@@ -130,7 +130,7 @@ public class adminsignup extends AppCompatActivity {
                                         {
                                             progressBar.setVisibility(View.GONE);
                                             Toast.makeText(adminsignup.this, "Account Created Successfully.", Toast.LENGTH_SHORT).show();
-                                            Intent i = new Intent(getApplicationContext(),navadmin.class);
+                                            Intent i = new Intent(getApplicationContext(), NavAdminActivity.class);
                                             i.putExtra("email",email);
                                             startActivity(i);
                                             finish();

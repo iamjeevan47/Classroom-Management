@@ -122,7 +122,7 @@ public class addstudent extends AppCompatActivity {
                                                 {
                                                     progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(addstudent.this, "Registered Successfully.", Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(getApplicationContext(), navadmin.class));
+                                                    startActivity(new Intent(getApplicationContext(), NavAdminActivity.class));
                                                     finish();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener()

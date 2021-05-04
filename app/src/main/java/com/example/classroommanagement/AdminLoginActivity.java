@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,44 +11,49 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.classroommanagement.manager.FirebaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class adminlogin extends AppCompatActivity {
+public class AdminLoginActivity extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
     Button btnlogin, btnfp, btnsignup;
-    EditText adminemail, adminpassword;
+    private EditText AdminEmailEditText, AdminPasswordEditText;
     ProgressBar progressBar;
     CheckBox checkBox;
-    FirebaseAuth auth;
+    //FirebaseAuth auth;
+
+    public FirebaseManager mFirebaseManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        mFirebaseManager = FirebaseManager.getInstance(this);
+
         setContentView(R.layout.activity_adminlogin);
+
+
 
         btnlogin = findViewById(R.id.login);
         btnfp = findViewById(R.id.forgotpassword);
         btnsignup = findViewById(R.id.signup);
 
-        adminemail = findViewById(R.id.email);
-        adminpassword = findViewById(R.id.password);
+        AdminEmailEditText = findViewById(R.id.email);
+        AdminPasswordEditText = findViewById(R.id.password);
         progressBar = findViewById(R.id.pro);
         checkBox = findViewById(R.id.check);
-        auth = FirebaseAuth.getInstance();
+       // auth = FirebaseAuth.getInstance();
 //        boolean isChecked = false;
 //        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
 //        {
@@ -78,30 +82,30 @@ public class adminlogin extends AppCompatActivity {
             public void onClick(View view) {
 
                 hideKeyBoard();
-                final String email = adminemail.getText().toString().trim();
-                final String password = adminpassword.getText().toString().trim();
+                final String email = AdminEmailEditText.getText().toString().trim();
+                final String password = AdminPasswordEditText.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password))
                 {
-                    adminemail.setError("Email is Required.");
-                    adminpassword.setError("Password is Required.");
+                    AdminEmailEditText.setError("Email is Required.");
+                    AdminPasswordEditText.setError("Password is Required.");
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 // authenticate the user
-                        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        mFirebaseManager.getmAuth().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    Toast.makeText(adminlogin.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(getApplicationContext(),navadmin.class);
+                                    Toast.makeText(AdminLoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(getApplicationContext(), NavAdminActivity.class);
                                     i.putExtra("email",email);
                                     startActivity(i);
                                     finish();
                                 }
                                 else
                                 {
-                                    Toast.makeText(adminlogin.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AdminLoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     progressBar.setVisibility(View.GONE);
                                 }
                             }

@@ -1,7 +1,6 @@
 package com.example.classroommanagement;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,12 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,7 +129,7 @@ public class addteacher extends AppCompatActivity {
                                         {
                                             progressBar.setVisibility(View.GONE);
                                             Toast.makeText(addteacher.this, "Registered Successfully.", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(getApplicationContext(), navadmin.class));
+                                            startActivity(new Intent(getApplicationContext(), NavAdminActivity.class));
                                             finish();
                                         }
                                     }).addOnFailureListener(new OnFailureListener()

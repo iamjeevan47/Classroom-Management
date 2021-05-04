@@ -46,8 +46,6 @@ public class NotesFragment extends Fragment {
         listView = view.findViewById(R.id.noteslist);
         uploadList = new ArrayList<>();
 
-        viewAllFiles();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -70,6 +68,12 @@ public class NotesFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewAllFiles();
+    }
+
     private void viewAllFiles()
     {
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -81,10 +85,10 @@ public class NotesFragment extends Fragment {
                 List<StorageReference> prefixes = listResult.getPrefixes();
                 List<StorageReference> items = listResult.getItems();
 
-                for (StorageReference prefix : listResult.getPrefixes())
-                {
-//                    System.out.println(prefix.listAll());
-                }
+//                for (StorageReference prefix : listResult.getPrefixes())
+//                {
+////                    System.out.println(prefix.listAll());
+//                }
                 for (final StorageReference item : listResult.getItems())
                 {
                     item.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -119,7 +123,7 @@ public class NotesFragment extends Fragment {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(Exception e)
+            public void onFailure(@NonNull Exception e)
             {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }

@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -79,7 +78,6 @@ public class updateteacherprofile extends AppCompatActivity {
                 {
                     progressDialog.dismiss();
                     Toast.makeText(updateteacherprofile.this, "Invalid Details", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 else
                 {
@@ -98,8 +96,9 @@ public class updateteacherprofile extends AppCompatActivity {
                                     {
                                         Toast.makeText(updateteacherprofile.this, "Please try again later", Toast.LENGTH_SHORT).show();
                                     }
-                                    startActivity(new Intent(getApplicationContext(), navadmin.class));
-                                    finish();
+//                                    startActivity(new Intent(getApplicationContext(), NavAdminActivity.class));
+//                                    finish();
+                                    onBackPressed();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -116,7 +115,7 @@ public class updateteacherprofile extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), navadmin.class));
+                startActivity(new Intent(getApplicationContext(), navteacher.class));
                 finish();
             }
         });

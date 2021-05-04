@@ -1,12 +1,12 @@
 package com.example.classroommanagement;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class AccountadFragment extends Fragment {
 
@@ -29,6 +27,14 @@ public class AccountadFragment extends Fragment {
     FirebaseAuth auth;
     Button logout;
     String userId;
+
+    private NavAdminActivity mAdminActivity;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mAdminActivity = (NavAdminActivity) context;
+    }
 
     public AccountadFragment()
     {
@@ -50,7 +56,7 @@ public class AccountadFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
         name = view.findViewById(R.id.adminname);
@@ -58,11 +64,11 @@ public class AccountadFragment extends Fragment {
         phone = view.findViewById(R.id.adminphone);
 
         logout = view.findViewById(R.id.logout);
-        fb = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
+        fb = mAdminActivity.mFirebaseManager.getFirestore();
+        auth = mAdminActivity.mFirebaseManager.getmAuth();
         userId = auth.getCurrentUser().getUid();
 
-        DocumentReference documentReference = fb.collection("Admin").document(getActivity().getIntent().getStringExtra("email").toString());
+        DocumentReference documentReference = fb.collection("Admin").document(getActivity().getIntent().getStringExtra("email"));
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot)
@@ -75,7 +81,7 @@ public class AccountadFragment extends Fragment {
                 }
                 else
                 {
-                    Toast.makeText(getActivity().getApplicationContext(), "Data not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Data not found", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,7 +91,7 @@ public class AccountadFragment extends Fragment {
             public void onClick(View view)
             {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(),adminlogin.class));
+                startActivity(new Intent(getContext(), AdminLoginActivity.class));
                 getActivity().finish();
             }
         });

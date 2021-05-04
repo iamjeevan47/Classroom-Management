@@ -1,6 +1,8 @@
 package com.example.classroommanagement;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -69,8 +71,6 @@ public class NotesupFragment extends Fragment
         listView = view.findViewById(R.id.listview);
         uploadList = new ArrayList<>();
 
-        viewAllFiles();
-
         choosepdf.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -99,14 +99,17 @@ public class NotesupFragment extends Fragment
                 Intent intent = new Intent(getActivity(),pdfviewer.class);
                 intent.putExtra("file",link);
                 intent.putExtra("pdf",name);
-//                intent.setType(Intent.ACTION_VIEW);
-//                intent.setData(Uri.parse(notesgettersetter.getUrl()));
-//                intent.setDataAndType(Uri.fromFile(file), "aplication/pdf");
                 startActivity(intent);
                 getActivity().finish();
             }
         });
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewAllFiles();
     }
 
     private void selectPDFfile()
@@ -117,6 +120,7 @@ public class NotesupFragment extends Fragment
         startActivityForResult(Intent.createChooser(intent,"Select File"),1);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -139,6 +143,7 @@ public class NotesupFragment extends Fragment
 
             StorageReference reference = storageReference.child("Notes/" + pdf.getText().toString() + ".pdf");
             reference.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot)
                 {
@@ -147,13 +152,13 @@ public class NotesupFragment extends Fragment
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onFailure(Exception e) {
+                public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                     progressDialog.setMessage((int)progress+"% " + " Uploaded");
                 }
@@ -176,10 +181,6 @@ public class NotesupFragment extends Fragment
                 List<StorageReference> prefixes = listResult.getPrefixes();
                 List<StorageReference> items = listResult.getItems();
 
-                for (StorageReference prefix : listResult.getPrefixes())
-                {
-//                    System.out.println(prefix.listAll());
-                }
                 for (final StorageReference item : listResult.getItems())
                 {
                     item.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {

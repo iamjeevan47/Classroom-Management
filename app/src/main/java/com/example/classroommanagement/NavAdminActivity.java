@@ -1,11 +1,13 @@
 package com.example.classroommanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+
+import com.example.classroommanagement.manager.FirebaseManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class navadmin extends AppCompatActivity {
+public class NavAdminActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
@@ -26,12 +29,17 @@ public class navadmin extends AppCompatActivity {
     private NotesupFragment notesupFragment;
     private AccountadFragment accountadFragment;
     FirebaseAuth auth;
+    public FirebaseManager mFirebaseManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //Initialize Firebase Manager
+        mFirebaseManager = FirebaseManager.getInstance(this);
+
         setContentView(R.layout.activity_navadmin);
         bottomNavigationView = findViewById(R.id.bottomnavigation);
         frameLayout = findViewById(R.id.fragmentcontainer);
@@ -46,8 +54,9 @@ public class navadmin extends AppCompatActivity {
         setFragment(myclassFragment);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId())
                 {
@@ -84,6 +93,7 @@ public class navadmin extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -116,7 +126,7 @@ public class navadmin extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id)
                     {
                         FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getApplicationContext(),adminlogin.class));
+                        startActivity(new Intent(getApplicationContext(), AdminLoginActivity.class));
                         finish();
                     }
                 })

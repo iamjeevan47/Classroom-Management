@@ -3,8 +3,6 @@ package com.example.classroommanagement;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -82,7 +80,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View view)
             {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(),adminlogin.class));
+                startActivity(new Intent(getContext(), AdminLoginActivity.class));
                 getActivity().finish();
             }
         });

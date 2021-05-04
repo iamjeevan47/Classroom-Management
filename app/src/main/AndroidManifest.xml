@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateteacherprofile"></activity>
+        <activity android:name=".updateteacherprofile" />
         <activity android:name=".pdfviewer" />
         <activity android:name=".updateadminprofile" />
         <activity android:name=".Viewtimetable" />
@@ -27,7 +27,7 @@
         <activity android:name=".studentdetails" />
         <activity android:name=".addstudent" />
         <activity android:name=".classdetails" />
-        <activity android:name=".navadmin" />
+        <activity android:name=".NavAdminActivity" />
         <activity android:name=".navteacher" />
         <activity android:name=".navstudent" />
         <activity android:name=".splashscreen">
@@ -43,7 +43,7 @@
         <activity android:name=".teacherlogin" />
         <activity android:name=".forgotpassword" />
         <activity android:name=".adminsignup" />
-        <activity android:name=".adminlogin" />
+        <activity android:name=".AdminLoginActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

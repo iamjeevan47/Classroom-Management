@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -78,7 +77,6 @@ public class updateadminprofile extends AppCompatActivity
                 {
                     progressDialog.dismiss();
                     Toast.makeText(updateadminprofile.this, "Invalid Details", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 else
                 {
@@ -97,8 +95,9 @@ public class updateadminprofile extends AppCompatActivity
                             {
                                 Toast.makeText(updateadminprofile.this, "Please try again later", Toast.LENGTH_SHORT).show();
                             }
-                            startActivity(new Intent(getApplicationContext(), navadmin.class));
-                            finish();
+//                            startActivity(new Intent(getApplicationContext(), NavAdminActivity.class));
+//                            finish();
+                            onBackPressed();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -115,7 +114,7 @@ public class updateadminprofile extends AppCompatActivity
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), navadmin.class));
+                startActivity(new Intent(getApplicationContext(), NavAdminActivity.class));
                 finish();
             }
         });

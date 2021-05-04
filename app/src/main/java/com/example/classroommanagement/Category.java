@@ -20,7 +20,7 @@ public class Category extends AppCompatActivity {
     }
 
     public void admin(View login){
-        startActivity(new Intent(getApplicationContext(),adminlogin.class));
+        startActivity(new Intent(getApplicationContext(), AdminLoginActivity.class));
     }
     public void teacher(View login){
         startActivity(new Intent(getApplicationContext(),teacherlogin.class));

@@ -16,7 +16,7 @@
             android:id="@+id/tdetaill"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Teacher Details"/>
+            app:title="Professor Details"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
